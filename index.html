@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>E Asttle Score Calculator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MDC Document QuickStart</title>
+    <meta name="description" content="This is a tool to easily calculate your spelling age using the score of an E Asttle spelling test. This is also an experiment for the new Material Design for the Web design library.">
+
+    <link rel='stylesheet' href='https://unpkg.com/material-components-web@0.41.0/dist/material-components-web.min.css'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css'>
+
+    <style>
+        :root {
+            --mdc-theme-primary: #3f51b5;
+            --mdc-theme-secondary: #f44336;
+            --mdc-theme-on-primary: #ffffff;
+            --mdc-theme-on-secondary: #ffffff;
+        }
+        
+        :root body {
+            background-color: #3f51b5;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        :root body main {
+            background-color: #ffffff;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            position: absolute;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            margin-left: 20px;
+            margin-right: 20px;
+            min-width: -webkit-calc(100vw - 80px);
+            min-width: -moz-calc(100vw - 80px);
+            min-width: calc(100vw - 80px);
+            min-height: -webkit-calc(100vh - 80px);
+            min-height: -moz-calc(100vh - 80px);
+            min-height: calc(100vh - 80px);
+            padding: 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <main class="mdc-typography">
+        <h1 class="mdc-typography--headline1">E Asttle Score Calculator</h1>
+        <p class="mdc-typography--body1">This is a tool to easily calculate your spelling age using the score of an <a href="https://e-asttle.tki.org.nz" target="_blank" ref="noopener">E Asttle</a> spelling test. This is also an experiment for the new Material Design for the Web design library. Simply select your score below.</p>
+        <div class="mdc-slider mdc-slider--discrete" tabindex="0" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Select Value">
+            <div class="mdc-slider__track-container">
+                <div class="mdc-slider__track"></div>
+            </div>
+            <div class="mdc-slider__thumb-container">
+                <div class="mdc-slider__pin">
+                    <span class="mdc-slider__pin-value-marker"></span>
+                </div>
+                <svg class="mdc-slider__thumb" width="21" height="21">
+                    <circle cx="10.5" cy="10.5" r="7.875"></circle>
+                </svg>
+                <div class="mdc-slider__focus-ring"></div>
+            </div>
+        </div>
+        <p class="mdc-typography--body1">Your spelling age is <span id="years">5</span> years and <span id="months">0</span> months</p>
+    </main>
+    <script async src='https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js'></script>
+    <script src='https://unpkg.com/material-components-web@0.41.0/dist/material-components-web.min.js'></script>
+
+    <script>
+        window.mdc.autoInit();
+
+        var slider = new mdc.slider.MDCSlider(document.querySelector(".mdc-slider"));
+        slider.listen("MDCSlider:change", function() {
+            document.getElementById("years").innerHTML = Math.floor(
+                slider.value / 10 + 5);
+
+            document.getElementById("months").innerHTML = [
+                0,
+                1,
+                2,
+                4,
+                5,
+                6,
+                7,
+                8,
+                10,
+                11,
+                0
+            ][
+
+                parseInt(
+                    (slider.value / 10).toString().split(".")[
+                        (slider.value / 10).toString().split(".").length - 1])
+            ];
+
+        });
+    </script>
+
+</body>
+
+</html>
